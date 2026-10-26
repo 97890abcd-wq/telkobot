@@ -8,7 +8,7 @@ from threading import Thread
 
 # Load secrets from .env file
 load_dotenv()
-API_TOKEN = os.getenv('BOT_TOKEN')
+API_TOKEN = os.getenv('API_TOKEN')
 ADMIN_ID = int(os.getenv('ADMIN_ID'))
 
 CONFIG_FILE = 'bot_config.json'
@@ -143,8 +143,8 @@ def admin_menu_handler(call):
         def get_member_count(group_id):
             if not group_id: return "Not Set"
             try:
-                chat_info = bot.get_chat(group_id)
-                return str(chat_info.member_count)
+                count = bot.get_chat_member_count(group_id)
+                return str(count)
             except Exception:
                 # FIXED: Removed parentheses that were breaking MarkdownV2
                 return "N/A \\- Add bot as Admin" 
